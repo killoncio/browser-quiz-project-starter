@@ -5,7 +5,7 @@ import { router } from './router.js';
 
 const loadApp = () => {
   quizData.currentQuestionIndex = 0;
-
+//Router func
   router('question');
 };
 
