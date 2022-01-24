@@ -8,25 +8,31 @@ import { quizData } from '../data.js';
 import { router } from '../router.js';
 
 export const initQuestionPage = (userInterface) => {
-  const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+    const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
 
-  const questionElement = getQuestionElement(currentQuestion.text);
-  userInterface.appendChild(questionElement);
+    const questionElement = getQuestionElement(currentQuestion.text);
+    userInterface.appendChild(questionElement);
 
-  const answersListElement = document.getElementById(ANSWERS_LIST_ID);
+    const answersListElement = document.getElementById(ANSWERS_LIST_ID);
 
-  for (const [key, answerText] of Object.entries(currentQuestion.answers)) {
-    const answerElement = createAnswerElement(key, answerText);
-    answersListElement.appendChild(answerElement);
-  }
+    for (const [key, answerText] of Object.entries(currentQuestion.answers)) {
+        const answerElement = createAnswerElement(key, answerText);
+        answersListElement.appendChild(answerElement);
+    }
 
-  document
-    .getElementById(NEXT_QUESTION_BUTTON_ID)
-    .addEventListener('click', nextQuestion);
+    document
+        .getElementById(NEXT_QUESTION_BUTTON_ID)
+        .addEventListener('click', isAnswerSelected);
 };
 
-const nextQuestion = () => {
-  quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
+const isAnswerSelected = () => {
+    const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+    currentQuestion.selected === null ? alert('please select any option') : nextQuestion();
 
-  router('question');
+}
+
+const nextQuestion = () => {
+    quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
+
+    router('question');
 };
