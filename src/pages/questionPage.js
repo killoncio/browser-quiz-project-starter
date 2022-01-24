@@ -34,12 +34,14 @@ const getAnswer = (e)=> {
   currentQuestion.selected=answer.charAt(0)
   if(currentQuestion.selected===currentQuestion.correct){
     console.log('selected correct answer')
+    e.target.style.backgroundColor='green'
     // updated current answers counter
     correctAnswers++
     console.log('selected correct answer : '+correctAnswers)
   }
   else {
     console.log('selected wrong answer')
+    e.target.style.backgroundColor='tomato'
   }
 }
 
