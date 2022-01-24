@@ -18,12 +18,30 @@ export const initQuestionPage = (userInterface) => {
   for (const [key, answerText] of Object.entries(currentQuestion.answers)) {
     const answerElement = createAnswerElement(key, answerText);
     answersListElement.appendChild(answerElement);
+    //get answers handler
+    answerElement.addEventListener('click',getAnswer)
   }
-
+// get next question handler
   document
     .getElementById(NEXT_QUESTION_BUTTON_ID)
-    .addEventListener('click', nextQuestion);
+    .addEventListener('click', nextQuestion)
 };
+let correctAnswers=0;
+// check answers if correct or not 
+const getAnswer = (e)=> {
+  const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+  const answer = e.target.innerText;
+  currentQuestion.selected=answer.charAt(0)
+  if(currentQuestion.selected===currentQuestion.correct){
+    console.log('selected correct answer')
+    // updated current answers counter
+    correctAnswers++
+    console.log('selected correct answer : '+correctAnswers)
+  }
+  else {
+    console.log('selected wrong answer')
+  }
+}
 
 const nextQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
