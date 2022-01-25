@@ -4,6 +4,7 @@ import { ANSWERS_LIST_ID } from '../constants.js';
 import { NEXT_QUESTION_BUTTON_ID } from '../constants.js';
 import { getQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
+import { createCheatButton, showCorrectAnswerElement } from '../views/cheatAnswerView.js';
 import { quizData } from '../data.js';
 import { router } from '../router.js';
 
@@ -23,6 +24,20 @@ export const initQuestionPage = (userInterface) => {
     document
         .getElementById(NEXT_QUESTION_BUTTON_ID)
         .addEventListener('click', isAnswerSelected);
+
+    let cheatCount = 0;
+    const userCheats = () => {
+        const correctAnswer = currentQuestion.correct;
+        const correctAnswerContainer = showCorrectAnswerElement(correctAnswer);
+        userInterface.appendChild(correctAnswerContainer)
+        cheatCount += 1;
+        console.log(cheatCount);
+    }
+
+    const cheatButtonElement = createCheatButton();
+    cheatButtonElement.addEventListener('click', userCheats)
+    userInterface.appendChild(cheatButtonElement);
+
 };
 
 const isAnswerSelected = () => {

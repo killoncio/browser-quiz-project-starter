@@ -22,7 +22,7 @@ export const quizData = {
                 c: 'var, let, const',
             },
             correct: 'c',
-            selected: null,
+            selected: 'c',
             links: [{
                     text: 'javascript.info',
                     href: 'https://javascript.info/variables',
