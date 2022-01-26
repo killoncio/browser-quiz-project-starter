@@ -15,7 +15,7 @@ export const initQuestionPage = (userInterface) => {
   for (const [key, answerText] of Object.entries(currentQuestion.answers)) {
     const answerElement = createAnswerElement(key, answerText);
     answersListElement.appendChild(answerElement);
-    answerElement.addEventListener('click',getAnswer)
+    answerElement.addEventListener('click',getAnswer);
   }
 // get next question handler
   document
