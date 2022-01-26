@@ -27,57 +27,46 @@ document
     .getElementById(NEXT_QUESTION_BUTTON_ID)
     .addEventListener('click', isAnswerSelected);
 };
-
 // check answers if correct or not 
 let isSelectedOneAnswer = false;
 
 const getAnswer = (e) => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
-if(!isSelectedOneAnswer){
-  const answer = e.target.innerText;
-  currentQuestion.selected = answer.charAt(0);
-  const isAnswerCorrect = currentQuestion.selected===currentQuestion.correct;
-  showAnswerIsCorrect(isAnswerCorrect,e.target);
-  isSelectedOneAnswer = true;
-}
+  if(!isSelectedOneAnswer){
+    const answer = e.target.innerText;
+    currentQuestion.selected = answer.charAt(0);
+    const isAnswerCorrect = currentQuestion.selected===currentQuestion.correct;
+    showAnswerIsCorrect(isAnswerCorrect,e.target);
+    isSelectedOneAnswer = true;
+  }
 }
 // Show user if user selection correct or not
 const showAnswerIsCorrect = (isAnswerCorrect,target) => {
   if(isAnswerCorrect){
-    setBackgroundColor('green',target)
+    setBackgroundColor('green',target);
   }
   else{
     setBackgroundColor('red',target); 
-    showCorrect()
-
+    showCorrect();
   }
 }
 
+// Change options backgroundColor
 const setBackgroundColor = (color,target)=> {
   target.style.backgroundColor = color;
 }  
+
+// Show user correct answer if selected wrong answer
 const showCorrect =()=> {
   const correctOption = document.querySelector(`li[data-correct="correct"]`);
   setBackgroundColor('green',correctOption);
 }
+
 const nextQuestion = () => {
-  isSelectedOneAnswer = false; // I added this code to reset isSelectedOneAnswer for next question
+  isSelectedOneAnswer = false;
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
   router('question');
 };
-
-// let cheatCount = 0;
-// const userCheats = () => {
-//     const correctAnswer = currentQuestion.correct;
-//     const correctAnswerContainer = showCorrectAnswerElement(correctAnswer);
-//     userInterface.appendChild(correctAnswerContainer)
-//     cheatCount += 1;
-//     console.log(cheatCount);
-// }
-
-// const cheatButtonElement = createCheatButton();
-// cheatButtonElement.addEventListener('click', userCheats)
-// userInterface.appendChild(cheatButtonElement);
 
 const isAnswerSelected = () => {
     const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
