@@ -40,13 +40,31 @@ if(!isSelectedOneAnswer){
 }
 // Show user if user selection correct or not
 const showAnswerIsCorrect = (isAnswerCorrect,target) => {
-  isAnswerCorrect ? setBackgroundColor('green',target) : setBackgroundColor('red',target);
+  if(isAnswerCorrect){
+    setBackgroundColor('green',target)
+  }
+  else{
+    setBackgroundColor('red',target); 
+    showCorrect()
+
+  }
 }
 
 const setBackgroundColor = (color,target)=> {
   target.style.backgroundColor = color;
 }  
-
+const showCorrect =()=> {
+  const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+  const answersListElement = document.getElementById(ANSWERS_LIST_ID);
+  const options= answersListElement.querySelectorAll('li')
+ return options.forEach((op)=>
+   {
+    if(op.innerText.charAt(0)===currentQuestion.correct){
+    return op.style.backgroundColor='green';
+    }
+   }
+  )
+}
 const nextQuestion = () => {
   isSelectedOneAnswer = false; // I added this code to reset isSelectedOneAnswer for next question
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
