@@ -29,7 +29,6 @@ const getAnswer = (e)=> {
 if(!isSelectedOneAnswer){
   const answer = e.target.innerText;
   currentQuestion.selected=answer.charAt(0)
-  showAnswerIsCorrect(currentQuestion.selected, currentQuestion.correct,e.target)
   currentQuestion.selected===currentQuestion.correct ? console.log('selected correct answer') : console.log('selected wrong answer')
   isSelectedOneAnswer=true;
 }
