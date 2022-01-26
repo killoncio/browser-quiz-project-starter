@@ -23,13 +23,19 @@ export const initQuestionPage = (userInterface) => {
     .addEventListener('click', nextQuestion)
 };
 // check answers if correct or not 
+let isSelectedOneAnswer= false;
 const getAnswer = (e)=> {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+if(!isSelectedOneAnswer){
   const answer = e.target.innerText;
   currentQuestion.selected=answer.charAt(0)
+  showAnswerIsCorrect(currentQuestion.selected, currentQuestion.correct,e.target)
   currentQuestion.selected===currentQuestion.correct ? console.log('selected correct answer') : console.log('selected wrong answer')
+  isSelectedOneAnswer=true;
+}
 }
 const nextQuestion = () => {
+  isSelectedOneAnswer=false; // I added this code to reset isSelectedOneAnswer for next question
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
   router('question');
 };
