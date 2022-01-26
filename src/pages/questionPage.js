@@ -18,7 +18,7 @@ for (const [key, answerText] of Object.entries(currentQuestion.answers)) {
   answersListElement.appendChild(answerElement);
   answerElement.addEventListener('click',getAnswer)
 }
-  
+
 // get next question handler
 document
     .getElementById(NEXT_QUESTION_BUTTON_ID)
