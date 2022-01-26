@@ -23,25 +23,27 @@ export const initQuestionPage = (userInterface) => {
     .addEventListener('click', nextQuestion)
 };
 // check answers if correct or not 
-let isSelectedOneAnswer= false;
-const getAnswer = (e)=> {
+let isSelectedOneAnswer = false;
+
+const getAnswer = (e) => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
 if(!isSelectedOneAnswer){
   const answer = e.target.innerText;
-  currentQuestion.selected=answer.charAt(0)
-  showAnswerIsCorrect(currentQuestion.selected, currentQuestion.correct,e.target)
-  isSelectedOneAnswer=true;
+  currentQuestion.selected = answer.charAt(0)
+  const isAnswerCorrect = currentQuestion.selected===currentQuestion.correct
+  showAnswerIsCorrect(isAnswerCorrect,e.target)
+  isSelectedOneAnswer = true;
 }
 }
 // Show user if user selection correct or not
-const showAnswerIsCorrect =(selectedAnswer,correctAnswer,target)=> {
-  selectedAnswer===correctAnswer ?setBackgroundColor('green',target) :setBackgroundColor('red',target)
+const showAnswerIsCorrect = (isAnswerCorrect,target) => {
+  isAnswerCorrect ? setBackgroundColor('green',target) : setBackgroundColor('red',target)
   }
-  const setBackgroundColor= (color,target)=> {
-   target.style.backgroundColor=color;
+  const setBackgroundColor = (color,target)=> {
+   target.style.backgroundColor = color;
   }  
 const nextQuestion = () => {
-  isSelectedOneAnswer=false; // I added this code to reset isSelectedOneAnswer for next question
+  isSelectedOneAnswer = false; // I added this code to reset isSelectedOneAnswer for next question
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
   router('question');
 };
