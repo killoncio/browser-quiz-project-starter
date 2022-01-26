@@ -15,6 +15,9 @@ userInterface.appendChild(questionElement);
 const answersListElement = document.getElementById(ANSWERS_LIST_ID);
 for (const [key, answerText] of Object.entries(currentQuestion.answers)) {
   const answerElement = createAnswerElement(key, answerText);
+    if(key===currentQuestion.correct){
+      answerElement.setAttribute('data-correct', 'correct');
+    }
   answersListElement.appendChild(answerElement);
   answerElement.addEventListener('click',getAnswer)
 }
@@ -54,16 +57,8 @@ const setBackgroundColor = (color,target)=> {
   target.style.backgroundColor = color;
 }  
 const showCorrect =()=> {
-  const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
-  const answersListElement = document.getElementById(ANSWERS_LIST_ID);
-  const options= answersListElement.querySelectorAll('li')
- return options.forEach((op)=>
-   {
-    if(op.innerText.charAt(0)===currentQuestion.correct){
-    return op.style.backgroundColor='green';
-    }
-   }
-  )
+  const correctOption = document.querySelector(`li[data-correct="correct"]`);
+  setBackgroundColor('green',correctOption);
 }
 const nextQuestion = () => {
   isSelectedOneAnswer = false; // I added this code to reset isSelectedOneAnswer for next question
