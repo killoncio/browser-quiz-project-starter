@@ -4,7 +4,6 @@ import { quizData } from './data.js';
 import { router } from './router.js';
 
 const loadApp = () => {
-  
     quizData.currentQuestionIndex = 0;
     router('question');
 };
@@ -12,6 +11,7 @@ const loadApp = () => {
 
 
 window.addEventListener('load', loadApp);
+//todo: remove comments since they do not add something here
 // 1- Find 10 question and make each of them 4 answer options
 // 2- Write a function that handle users selection and check if it is correct or not . 
 //      Create a handler folder and call the fuction in pages=>guestionPage.js
@@ -26,6 +26,6 @@ window.addEventListener('load', loadApp);
 
 // user can see their score at the end of the quiz
 
+//todo: this is duplicated
 window.addEventListener('load', loadApp);
 
-//
