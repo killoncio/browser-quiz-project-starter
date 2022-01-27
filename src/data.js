@@ -8,7 +8,8 @@
     not by your logic
     not by your listeners
 */
-
+export const selectedCorrectAnswersData = [];
+export const selectedWrongAnswersData = [];
 export const quizData = {
   currentQuestionIndex: 0,
   // the questions in the quiz
@@ -21,7 +22,7 @@ export const quizData = {
         c: "var, let, const",
       },
       correct: "c",
-      selected: "c",
+      selected: null,
       links: [
         {
           text: "javascript.info",

@@ -9,9 +9,14 @@ import {
   showCorrectAnswerElement,
 } from "../views/cheatAnswerView.js";
 import { showScoreElement } from "../views/showScoreView.js";
-import { quizData } from "../data.js";
+import {
+  quizData,
+  selectedWrongAnswersData,
+  selectedCorrectAnswersData,
+} from "../data.js";
 import { router } from "../router.js";
 let counter = 0;
+let cheatCount = 0;
 export const initQuestionPage = (userInterface) => {
   userInterface.appendChild(
     showScoreElement(counter, quizData.questions.length)
@@ -29,33 +34,68 @@ export const initQuestionPage = (userInterface) => {
     answerElement.addEventListener("click", getAnswer);
   }
 
+  const userCheats = () => {
+    //todo: you can place this function outside initQuestionPage I think
+    const correctAnswer = currentQuestion.correct;
+    const correctAnswerContainer = showCorrectAnswerElement(correctAnswer);
+    userInterface.appendChild(correctAnswerContainer);
+    setTimeout(() => {
+      userInterface.removeChild(correctAnswerContainer);
+      userInterface.removeChild(cheatButtonElement);
+    }, 2000);
+    cheatCount += 1;
+    //todo: are you thinking to do something with this info you store? Because if you want to do something, you need to store it in a different way so it does not get back to 0 when going to the following question
+  };
+
+  // todo: why is this not an html element? Do you need to create it dinamically? If so, maybe you can add id directly inside getQuestionElement function in questionView.js
+  // you could then place the other function showCorrectAnswerElement inside questionView.js as well, no need for cheatAnswerView.js then.
+  const cheatButtonElement = createCheatButton();
+  cheatButtonElement.addEventListener("click", userCheats); //todo: missing ; at the end of line
+  userInterface.appendChild(cheatButtonElement);
+
   // get next question handler
   document
     .getElementById(NEXT_QUESTION_BUTTON_ID)
     .addEventListener("click", isAnswerSelected);
 };
 // check answers if correct or not
-let isSelectedOneAnswer = false;
-
+export { cheatCount };
 const getAnswer = (e) => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
-  if (!isSelectedOneAnswer) {
+  if (!currentQuestion.selected) {
     const answer = e.target.innerText;
     currentQuestion.selected = answer.charAt(0);
     const isAnswerCorrect =
       currentQuestion.selected === currentQuestion.correct;
     showAnswerIsCorrect(isAnswerCorrect, e.target);
-    isSelectedOneAnswer = true;
   }
 };
 // Show user if user selection correct or not
 const showAnswerIsCorrect = (isAnswerCorrect, target) => {
+  const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   if (isAnswerCorrect) {
     setBackgroundColor("green", target);
     counter++;
+    const userAnswer = {
+      questionIndex: quizData.currentQuestionIndex,
+      title: currentQuestion.text,
+      userSelection: target.innerText,
+    };
+    selectedCorrectAnswersData.push(userAnswer);
   } else {
     setBackgroundColor("red", target);
+    counter++;
     showCorrect();
+    const correctOption = document.querySelector(`li[data-correct="correct"]`);
+
+    const userAnswer = {
+      questionIndex: quizData.currentQuestionIndex,
+      title: currentQuestion.text,
+      userSelection: target.innerText,
+      correctSelection: correctOption.innerText,
+    };
+    selectedWrongAnswersData.push(userAnswer);
+    console.log(selectedWrongAnswersData);
   }
 };
 
@@ -71,9 +111,12 @@ const showCorrect = () => {
 };
 
 const nextQuestion = () => {
-  isSelectedOneAnswer = false;
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
-  router("question");
+  if (quizData.currentQuestionIndex < quizData.questions.length - 1) {
+    router("question");
+  } else {
+    router("result");
+  }
 };
 const isAnswerSelected = () => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
