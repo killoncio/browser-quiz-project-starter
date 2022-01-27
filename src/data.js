@@ -22,7 +22,7 @@ export const quizData = {
                 d: 'Events are animations and transistions on the document object model.',
             },
             correct: 'c',
-            selected: 'c',
+            selected: null,
             links: [{
                     text: 'javascript.info',
                     href: 'https://javascript.info/variables',
@@ -170,7 +170,7 @@ export const quizData = {
                 a: 'The .addEventListener() method must be paired with a .removeEventListener() method.',
                 b: 'The .addEventListener() method can use anonymous functions.',
                 c: 'The .addEventListener() method is good for large code and it can be used to add multiple event handlers to a specific event.',
-               
+
             },
             correct: 'c',
             selected: null,
@@ -183,7 +183,7 @@ export const quizData = {
                     href: 'https://ui.dev/var-let-const/',
                 },
             ],
-        }, 
+        },
         {
             text: 'What does `typeof` do?',
             answers: {
