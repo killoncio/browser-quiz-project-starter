@@ -19,3 +19,4 @@ export const showCorrectAnswerElement = (correctAnswer) => {
     return correctAnswerContainer;
 }
 
+//todo: createCheatButton is not necesary if you add the html in questionView.js; in that moment, I'd move showCorrectAnswerElement function to that file, and remove this file.

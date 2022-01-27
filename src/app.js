@@ -10,7 +10,7 @@ const loadApp = () => {
 };
 //user can select an answer for each question
 
-
+//todo: remove duplicated addEventListener and unnecesary comments
 window.addEventListener('load', loadApp);
 // 1- Find 10 question and make each of them 4 answer options
 // 2- Write a function that handle users selection and check if it is correct or not . 

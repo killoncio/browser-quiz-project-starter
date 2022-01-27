@@ -22,6 +22,6 @@ export const getQuestionElement = (question) => {
 
     <button class="btn" id = "${NEXT_QUESTION_BUTTON_ID}"> Next question </button>
   `;
-
+// todo: add here button to cheat, instead of dinamically in questionPage.js
   return element;
 };
