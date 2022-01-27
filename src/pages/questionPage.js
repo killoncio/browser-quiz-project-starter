@@ -35,7 +35,6 @@ export const initQuestionPage = (userInterface) => {
   }
 
   const userCheats = () => {
-    //todo: you can place this function outside initQuestionPage I think
     const correctAnswer = currentQuestion.correct;
     const correctAnswerContainer = showCorrectAnswerElement(correctAnswer);
     userInterface.appendChild(correctAnswerContainer);
@@ -44,13 +43,10 @@ export const initQuestionPage = (userInterface) => {
       userInterface.removeChild(cheatButtonElement);
     }, 2000);
     cheatCount += 1;
-    //todo: are you thinking to do something with this info you store? Because if you want to do something, you need to store it in a different way so it does not get back to 0 when going to the following question
   };
-
-  // todo: why is this not an html element? Do you need to create it dinamically? If so, maybe you can add id directly inside getQuestionElement function in questionView.js
-  // you could then place the other function showCorrectAnswerElement inside questionView.js as well, no need for cheatAnswerView.js then.
-  const cheatButtonElement = createCheatButton();
-  cheatButtonElement.addEventListener("click", userCheats); //todo: missing ; at the end of line
+// you could then place the other function showCorrectAnswerElement inside questionView.js as well, no need for cheatAnswerView.js then.
+ const cheatButtonElement = createCheatButton();
+  cheatButtonElement.addEventListener("click", userCheats); 
   userInterface.appendChild(cheatButtonElement);
 
   // get next question handler
@@ -95,7 +91,6 @@ const showAnswerIsCorrect = (isAnswerCorrect, target) => {
       correctSelection: correctOption.innerText,
     };
     selectedWrongAnswersData.push(userAnswer);
-    console.log(selectedWrongAnswersData);
   }
 };
 
