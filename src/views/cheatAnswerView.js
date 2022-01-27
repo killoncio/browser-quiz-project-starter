@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
 /**
- * Create a button element to get correct answer 
+ * Create a button element to get correct answer
  * @returns {Element}
  */
 
@@ -18,3 +18,4 @@ export const showCorrectAnswerElement = (correctAnswer) => {
     correctAnswerContainer.classList.add("btn");
     return correctAnswerContainer;
 }
+

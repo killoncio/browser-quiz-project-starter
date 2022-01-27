@@ -1,7 +1,6 @@
-'use strict';
+"use strict";
 
 /* Program Data
-
   in this file you can declare variables to store important data for your program
   the data can only be primitives, objects or arrays
   do not store dom elements in these variables!!!!
@@ -9,7 +8,8 @@
     not by your logic
     not by your listeners
 */
-
+export const selectedCorrectAnswersData = [];
+export const selectedWrongAnswersData = [];
 export const quizData = {
     currentQuestionIndex: 0,
     // the questions in the quiz
