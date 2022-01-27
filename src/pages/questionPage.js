@@ -8,10 +8,14 @@ import {
   createCheatButton,
   showCorrectAnswerElement,
 } from "../views/cheatAnswerView.js";
+import { showScoreElement } from "../views/showScoreView.js";
 import { quizData } from "../data.js";
 import { router } from "../router.js";
-
+let counter = 0;
 export const initQuestionPage = (userInterface) => {
+  userInterface.appendChild(
+    showScoreElement(counter, quizData.questions.length)
+  );
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   const questionElement = getQuestionElement(currentQuestion.text);
   userInterface.appendChild(questionElement);
@@ -48,6 +52,7 @@ const getAnswer = (e) => {
 const showAnswerIsCorrect = (isAnswerCorrect, target) => {
   if (isAnswerCorrect) {
     setBackgroundColor("green", target);
+    counter++;
   } else {
     setBackgroundColor("red", target);
     showCorrect();
@@ -70,7 +75,6 @@ const nextQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
   router("question");
 };
-
 const isAnswerSelected = () => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   currentQuestion.selected === null
