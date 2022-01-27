@@ -1,14 +1,23 @@
-body {
-  padding: 0;
+* {
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  background-color: rgb(217, 230, 236);
+}
+
 .centered {
   width: 60%;
   margin: auto;
   text-align: center;
-  background-color: rgba(233, 233, 233, 0.548);
+  border: 2px solid rgb(50, 7, 150);
+  padding: 1rem;
+  border-radius: 5px;
 }
+
+.dashboard {}
 
 .scrollable {
   height: auto;
@@ -18,7 +27,32 @@ body {
 
 ul {
   list-style: none;
+  margin: 1rem 2rem;
 }
+
+ul li {
+  border: 2px solid rgb(49, 193, 250);
+  padding: 1rem;
+  margin: 1rem 0;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn {
+  background: rgb(235, 235, 10);
+  padding: 0.5rem 2rem;
+  margin: 0.5rem 0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn:hover,
+ul li:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  ;
+}
+
 #result-container {
   display: flex;
   width: 80%;
