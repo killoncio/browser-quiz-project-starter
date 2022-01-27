@@ -8,3 +8,6 @@ export const showScoreElement = (correctAnswerCount, totalQuestion) => {
   You Have Solved : ${correctAnswerCount} of ${totalQuestion}`;
   return element;
 };
+
+//todo: for better readability, do evertything with template literals
+// return `<p id=${SHOW_SCORE_ID}>You Have Solved : ${correctAnswerCount} of ${totalQuestion}</p>`;

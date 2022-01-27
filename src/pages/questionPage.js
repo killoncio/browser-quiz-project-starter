@@ -15,8 +15,8 @@ import {
   selectedCorrectAnswersData,
 } from "../data.js";
 import { router } from "../router.js";
-let counter = 0;
-let cheatCount = 0;
+let counter = 0; //todo: this variable is better to have it inside data.js, same as currentQuestionIndex for example is there. The benefit is that you have all data localized in one file, not scattered all around different files.
+let cheatCount = 0; //todo: same as previous variable
 export const initQuestionPage = (userInterface) => {
   userInterface.appendChild(
     showScoreElement(counter, quizData.questions.length)
@@ -44,9 +44,9 @@ export const initQuestionPage = (userInterface) => {
     }, 2000);
     cheatCount += 1;
   };
-// you could then place the other function showCorrectAnswerElement inside questionView.js as well, no need for cheatAnswerView.js then.
- const cheatButtonElement = createCheatButton();
-  cheatButtonElement.addEventListener("click", userCheats); 
+
+ const cheatButtonElement = createCheatButton(); //todo: as mentioned, this could be built in questionView.js
+  cheatButtonElement.addEventListener("click", userCheats);
   userInterface.appendChild(cheatButtonElement);
 
   // get next question handler
@@ -55,7 +55,7 @@ export const initQuestionPage = (userInterface) => {
     .addEventListener("click", isAnswerSelected);
 };
 // check answers if correct or not
-export { cheatCount };
+export { cheatCount }; //todo: If you need to use it somewhere else, better to store it inside data.js, as for example currentQuestionIndex, so you have all data in one place
 const getAnswer = (e) => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   if (!currentQuestion.selected) {
@@ -78,13 +78,21 @@ const showAnswerIsCorrect = (isAnswerCorrect, target) => {
       userSelection: target.innerText,
     };
     selectedCorrectAnswersData.push(userAnswer);
+    // todo: you do not need to do all this. You just have to store the answer user has selected in quizData.questions[currentQuestion].selected (which is already done in l63)
+    // then, to get any information computed out of that, like number of correct answers / incorrect answers / counter / etc... you just create a function that goes through quizData object and returns what you neeed
+    // for example:
+    // function getCorrectAnswers() {
+    //  return quizData.questions.filter( question => question.correct === question.selected);
+    // }
+    // I understand it might seem more complex at the beginning, but it's the normal approach to use filter and map through a data element
+    // Having duplicated source of datas (like in your case with quizData, selectedCorrectAnswersData, selectedWrongAnswersData and counter) makes it harder to maintain (you need to remember to update all variables) and to read
   } else {
     setBackgroundColor("red", target);
     counter++;
     showCorrect();
-    const correctOption = document.querySelector(`li[data-correct="correct"]`);
+    const correctOption = document.querySelector(`li[data-correct="correct"]`); // todo: this would also not be needed if you follow what mentioned above
 
-    const userAnswer = {
+    const userAnswer = { //todo: as above, I think this is not needed
       questionIndex: quizData.currentQuestionIndex,
       title: currentQuestion.text,
       userSelection: target.innerText,

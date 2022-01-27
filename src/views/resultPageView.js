@@ -9,6 +9,7 @@ export const createTotalScoreElement = (totalScore, isSuccess = true) => {
     isSuccess ? "Successful" : "Failed"
   }`;
   return scoreElement;
+  //todo: same as comment in showScoreView, use template literals to build the whole output
 };
 export const createResultContainer = () => {
   const resultContainer = document.createElement("div");
@@ -26,4 +27,5 @@ export const createAnswersContainer = (answers, correct = null) => {
       }</p> <hr>`;
   });
   return answersContainerElement;
+  //todo: same as above
 };
