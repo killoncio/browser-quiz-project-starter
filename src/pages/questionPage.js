@@ -31,17 +31,15 @@ export const initQuestionPage = (userInterface) => {
     .addEventListener("click", isAnswerSelected);
 };
 // check answers if correct or not
-let isSelectedOneAnswer = false;
 
 const getAnswer = (e) => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
-  if (!isSelectedOneAnswer) {
+  if (!currentQuestion.selected) {
     const answer = e.target.innerText;
     currentQuestion.selected = answer.charAt(0);
     const isAnswerCorrect =
       currentQuestion.selected === currentQuestion.correct;
     showAnswerIsCorrect(isAnswerCorrect, e.target);
-    isSelectedOneAnswer = true;
   }
 };
 // Show user if user selection correct or not
@@ -66,7 +64,6 @@ const showCorrect = () => {
 };
 
 const nextQuestion = () => {
-  isSelectedOneAnswer = false;
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
   router("question");
 };
