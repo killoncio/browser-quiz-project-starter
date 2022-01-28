@@ -103,7 +103,7 @@ const showCorrect = () => {
 
 const nextQuestion = () => {
     quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
-    if (quizData.currentQuestionIndex < quizData.questions.length - 1) {
+    if (quizData.currentQuestionIndex < quizData.questions.length) {
         router("question");
     } else {
         router("result");
