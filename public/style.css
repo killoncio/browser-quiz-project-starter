@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -5,19 +7,37 @@
 }
 
 body {
-  background-color: rgb(217, 230, 236);
+  background: url(/public/Assests/body_background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+h1 {
+  font-family: 'Archivo',
+    sans-serif;
+  color: #0D0152;
+  margin-bottom: 2rem;
+
 }
 
 .centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
   width: 60%;
+  transform: translate(-50%, -50%);
   margin: auto;
   text-align: center;
-  border: 2px solid rgb(50, 7, 150);
+  border: 2px solid #0D0152;
   padding: 1rem;
   border-radius: 5px;
+  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+  ;
+  background-color: rgba(176, 238, 235, 0.7);
+  box-shadow: #fffeff 0px 5px 15px;
 }
 
-.dashboard {}
 
 .scrollable {
   height: auto;
@@ -31,26 +51,72 @@ ul {
 }
 
 ul li {
-  border: 2px solid rgb(49, 193, 250);
+  border: 2px solid #0D0152;
+  background-color: rgba(216, 214, 211, 0.7);
   padding: 1rem;
   margin: 1rem 0;
   text-align: left;
   cursor: pointer;
   border-radius: 5px;
+  font-family: 'Archivo',
+    sans-serif;
 }
 
 .btn {
-  background: rgb(235, 235, 10);
+  /* background: rgb(5, 196, 154);
   padding: 0.5rem 2rem;
   margin: 0.5rem 0;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 5px; */
+  font-family: 'Archivo',
+    sans-serif;
+  border: 2px solid currentColor;
+  border-radius: 2rem;
+  color: #0D0152;
+  font-size: 1rem;
+  font-weight: 100;
+  overflow: hidden;
+  padding: 0.5rem 2rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  text-decoration: none;
+  transition: .2s transform ease-in-out;
+  will-change: transform;
+  z-index: 0;
+
 }
 
-.btn:hover,
+.btn::after {
+  background-color: #0D0152;
+  border-radius: 2rem;
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-100%, 0) rotate(10deg);
+  transform-origin: top left;
+  transition: .2s transform ease-out;
+  will-change: transform;
+  z-index: -1;
+}
+
+.btn:hover::after {
+  transform: translate(0, 0);
+}
+
+.btn:hover {
+  border: 2px solid transparent;
+  color: rgb(255, 255, 255);
+  transform: scale(1.05);
+  will-change: transform;
+}
+
+
 ul li:hover {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  ;
+  box-shadow: #0D0152 0px 5px 15px;
 }
 
 #result-container {
@@ -59,4 +125,13 @@ ul li:hover {
   height: 60%;
   margin: auto;
   gap: 2rem;
+}
+
+.scoretitle {
+  text-align: left;
+  padding-left: 1rem;
+  color: #0D0152;
+  font-family: 'Archivo',
+    sans-serif;
+  font-size: 1rem;
 }
