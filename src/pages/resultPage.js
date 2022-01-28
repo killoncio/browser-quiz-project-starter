@@ -3,6 +3,7 @@
      selectedWrongAnswersData,
      quizData,
  } from "../data.js";
+
  import {
      createAnswersContainer,
      createTotalScoreElement,
@@ -13,7 +14,7 @@
      const pageContainerElement = document.createElement("div");
      userInterface.appendChild(pageContainerElement);
      const totalScoreElement = createTotalScoreElement(
-         selectedCorrectAnswersData.length - cheatCount
+         (selectedCorrectAnswersData.length - cheatCount), true, quizData.questions.length
      );
      pageContainerElement.appendChild(totalScoreElement);
      const resultContainerElement = createResultContainer();
