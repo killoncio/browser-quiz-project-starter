@@ -12,3 +12,4 @@ export const ANSWERS_LIST_ID = "answers-list";
 export const NEXT_QUESTION_BUTTON_ID = "next-question-button";
 export const SHOW_SCORE_ID = "show-score";
 export const RESULT_CONTAINER_ID = "result-container";
+export const CHEAT_BUTTON_ID = 'cheat-button';
