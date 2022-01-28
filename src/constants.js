@@ -13,3 +13,6 @@ export const NEXT_QUESTION_BUTTON_ID = "next-question-button";
 export const SHOW_SCORE_ID = "show-score";
 export const RESULT_CONTAINER_ID = "result-container";
 export const CHEAT_BUTTON_ID = 'cheat-button';
+export const ANSWER_CONTAINER = 'answer-container';
+export const ANSWER_WRAPPER = 'answer-wrapper';
+export const RESULT_CENTERED = 'result-centered';

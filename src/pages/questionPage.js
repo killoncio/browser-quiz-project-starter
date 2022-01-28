@@ -52,7 +52,7 @@ export const initQuestionPage = (userInterface) => {
   // get next question handler
   document
     .getElementById(NEXT_QUESTION_BUTTON_ID)
-    .addEventListener("click", isAnswerSelected);
+    .addEventListener("click", onAnswerSelected);
 };
 // check answers if correct or not
 export { cheatCount };
@@ -113,7 +113,7 @@ const nextQuestion = () => {
     router("result");
   }
 };
-const isAnswerSelected = () => {
+const onAnswerSelected = () => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   currentQuestion.selected === null
     ? alert("please select any option")
