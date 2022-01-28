@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@600&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -13,9 +13,8 @@ body {
 }
 
 h1 {
-  font-family: 'Archivo',
-  sans-serif;
-  color: #0D0152;
+  font-family: "Archivo", sans-serif;
+  color: #0d0152;
   margin-bottom: 2rem;
 }
 
@@ -27,7 +26,7 @@ h1 {
   transform: translate(-50%, -50%);
   margin: auto;
   text-align: center;
-  border: 2px solid #0D0152;
+  border: 2px solid #0d0152;
   padding: 1rem;
   border-radius: 5px;
   background-color: rgba(176, 238, 235, 0.7);
@@ -41,34 +40,32 @@ h1 {
 }
 
 .scrollable {
-    height: auto;
-    max-height: 80vh;
-    overflow: auto;
+  height: auto;
+  max-height: 80vh;
+  overflow: auto;
 }
 
 ul {
-    list-style: none;
-    margin: 1rem 2rem;
+  list-style: none;
+  margin: 1rem 2rem;
 }
 
 ul li {
-  border: 2px solid #0D0152;
+  border: 2px solid #0d0152;
   background-color: rgba(216, 214, 211, 0.7);
   padding: 1rem;
   margin: 1rem 0;
   text-align: left;
   cursor: pointer;
   border-radius: 5px;
-  font-family: 'Archivo',
-    sans-serif;
+  font-family: "Archivo", sans-serif;
 }
 
 .btn {
-  font-family: 'Archivo',
-    sans-serif;
+  font-family: "Archivo", sans-serif;
   border: 2px solid currentColor;
   border-radius: 2rem;
-  color: #0D0152;
+  color: #0d0152;
   font-size: 1rem;
   font-weight: 100;
   overflow: hidden;
@@ -76,15 +73,15 @@ ul li {
   margin-bottom: 0.5rem;
   position: relative;
   text-decoration: none;
-  transition: .2s transform ease-in-out;
+  transition: 0.2s transform ease-in-out;
   will-change: transform;
   z-index: 0;
 }
 
 .btn::after {
-  background-color: #0D0152;
+  background-color: #0d0152;
   border-radius: 2rem;
-  content: '';
+  content: "";
   display: block;
   height: 100%;
   width: 100%;
@@ -93,7 +90,7 @@ ul li {
   top: 0;
   transform: translate(-100%, 0) rotate(10deg);
   transform-origin: top left;
-  transition: .2s transform ease-out;
+  transition: 0.2s transform ease-out;
   will-change: transform;
   z-index: -1;
 }
@@ -109,45 +106,44 @@ ul li {
   will-change: transform;
 }
 
-
 ul li:hover {
-  box-shadow: #0D0152 0px 5px 15px;
+  box-shadow: #0d0152 0px 5px 15px;
 }
 
 #result-container {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    display: flex;
-    margin: auto;
-    gap: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  display: flex;
+  margin: auto;
+  gap: 2rem;
 }
 
 #result-container h3 {
-    font-size: 16px;
-    margin: 0.5rem;
+  font-size: 16px;
+  margin: 0.5rem;
 }
 
 p {
-    font-size: 12px;
-    margin: 0.5rem;
+  font-size: 12px;
+  margin: 0.5rem;
 }
 
 .answer-container {
-    width: 50%;
-    margin-top: 0.5rem;
+  width: 50%;
+  margin-top: 0.5rem;
 }
 
 .answer-wrapper {
-    margin: 1rem;
-    border: 1px solid rgb(170, 169, 169);
-    border-radius: 0.5rem;
-    box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(46, 45, 45, 0.5);
+  margin: 1rem;
+  border: 1px solid rgb(170, 169, 169);
+  border-radius: 0.5rem;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(46, 45, 45, 0.5);
 }
 
 .scoretitle {
   text-align: left;
   padding-left: 1rem;
-  color: #0D0152;
-  font-family: 'Archivo',
-    sans-serif;
+  color: #0d0152;
+  font-family: "Archivo", sans-serif;
   font-size: 1rem;
 }
