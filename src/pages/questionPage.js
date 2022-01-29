@@ -11,15 +11,16 @@ import { showCorrectAnswerElement } from "../views/cheatAnswerView.js";
 import { showScoreElement } from "../views/showScoreView.js";
 import {
   quizData,
-  selectedWrongAnswersData,
-  selectedCorrectAnswersData,
+  // selectedWrongAnswersData,
+  // selectedCorrectAnswersData,
 } from "../data.js";
+import { addStorage } from "../localstorage/localStorage.js";
 import { router } from "../router.js";
-let counter = 0;
-let cheatCount = 0;
+// let counter = 0;
+// let cheatCount = 0;
 export const initQuestionPage = (userInterface) => {
   userInterface.appendChild(
-    showScoreElement(counter, quizData.questions.length)
+    showScoreElement(quizData.counter, quizData.questions.length)
   );
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   const questionElement = getQuestionElement(currentQuestion.text);
@@ -42,7 +43,7 @@ export const initQuestionPage = (userInterface) => {
       userInterface.removeChild(correctAnswerContainer);
       userInterface.removeChild(cheatButtonElement);
     }, 2000);
-    cheatCount += 1;
+    quizData.cheatCount++;
   };
   // you could then place the other function showCorrectAnswerElement inside questionView.js as well, no need for cheatAnswerView.js then.
   const cheatButtonElement = document.getElementById(CHEAT_BUTTON_ID);
@@ -55,7 +56,6 @@ export const initQuestionPage = (userInterface) => {
     .addEventListener("click", onAnswerSelected);
 };
 // check answers if correct or not
-export { cheatCount };
 const getAnswer = (e) => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   if (!currentQuestion.selected) {
@@ -69,18 +69,17 @@ const getAnswer = (e) => {
 // Show user if user selection correct or not
 const showAnswerIsCorrect = (isAnswerCorrect, target) => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+  quizData.counter++;
   if (isAnswerCorrect) {
     setBackgroundColor("green", target);
-    counter++;
     const userAnswer = {
       questionIndex: quizData.currentQuestionIndex,
       title: currentQuestion.text,
       userSelection: target.innerText,
     };
-    selectedCorrectAnswersData.push(userAnswer);
+    quizData.selectedCorrectAnswersData.push(userAnswer);
   } else {
     setBackgroundColor("red", target);
-    counter++;
     showCorrect();
     const correctOption = document.querySelector(`li[data-correct="correct"]`);
 
@@ -90,7 +89,7 @@ const showAnswerIsCorrect = (isAnswerCorrect, target) => {
       userSelection: target.innerText,
       correctSelection: correctOption.innerText,
     };
-    selectedWrongAnswersData.push(userAnswer);
+    quizData.selectedWrongAnswersData.push(userAnswer);
   }
 };
 
@@ -107,6 +106,7 @@ const showCorrect = () => {
 
 const nextQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
+  addStorage(quizData);
   if (quizData.currentQuestionIndex < quizData.questions.length) {
     router("question");
   } else {
