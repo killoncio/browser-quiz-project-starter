@@ -6,6 +6,7 @@ import {
   createResultContainer,
 } from "../views/resultPageView.js";
 import { TEST_AGAIN_ID } from "../constants.js";
+import { createBtnElement } from "../views/resultPageView.js";
 import { router } from "../router.js";
 export const initResultPage = (userInterface) => {
   const pageContainerElement = document.createElement("div");
@@ -18,6 +19,8 @@ export const initResultPage = (userInterface) => {
   pageContainerElement.appendChild(totalScoreElement);
   const resultContainerElement = createResultContainer();
   pageContainerElement.appendChild(resultContainerElement);
+  const startAgainBtnElement = createBtnElement();
+  pageContainerElement.appendChild(startAgainBtnElement);
   const correctAnswerContainer = createAnswersContainer(
     quizData.selectedCorrectAnswersData
   );

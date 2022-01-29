@@ -6,7 +6,6 @@ import { readStorage } from "./localstorage/localStorage.js";
 
 const loadApp = () => {
   let data = readStorage();
-  console.log(data);
   quizData.currentQuestionIndex = data.currentQuestionIndex;
   router("question");
 };

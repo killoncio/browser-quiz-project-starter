@@ -9,15 +9,9 @@ import { getQuestionElement } from "../views/questionView.js";
 import { createAnswerElement } from "../views/answerView.js";
 import { showCorrectAnswerElement } from "../views/cheatAnswerView.js";
 import { showScoreElement } from "../views/showScoreView.js";
-import {
-  quizData,
-  // selectedWrongAnswersData,
-  // selectedCorrectAnswersData,
-} from "../data.js";
+import { quizData } from "../data.js";
 import { addStorage } from "../localstorage/localStorage.js";
 import { router } from "../router.js";
-// let counter = 0;
-// let cheatCount = 0;
 export const initQuestionPage = (userInterface) => {
   userInterface.appendChild(
     showScoreElement(quizData.counter, quizData.questions.length)
@@ -34,7 +28,7 @@ export const initQuestionPage = (userInterface) => {
     answersListElement.appendChild(answerElement);
     answerElement.addEventListener("click", getAnswer);
   }
-
+  // User can see correct answer by clicking on "see answer" button
   const userCheats = () => {
     const correctAnswer = currentQuestion.correct;
     const correctAnswerContainer = showCorrectAnswerElement(correctAnswer);
@@ -45,7 +39,7 @@ export const initQuestionPage = (userInterface) => {
     }, 2000);
     quizData.cheatCount++;
   };
-  // you could then place the other function showCorrectAnswerElement inside questionView.js as well, no need for cheatAnswerView.js then.
+  // Create see answer button element
   const cheatButtonElement = document.getElementById(CHEAT_BUTTON_ID);
   cheatButtonElement.addEventListener("click", userCheats);
   userInterface.appendChild(cheatButtonElement);
@@ -55,7 +49,7 @@ export const initQuestionPage = (userInterface) => {
     .getElementById(NEXT_QUESTION_BUTTON_ID)
     .addEventListener("click", onAnswerSelected);
 };
-// check answers if correct or not
+// Get user selection and call 'showAnswerIsCorrect' function
 const getAnswer = (e) => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   if (!currentQuestion.selected) {
@@ -63,15 +57,17 @@ const getAnswer = (e) => {
     currentQuestion.selected = answer.charAt(0);
     const isAnswerCorrect =
       currentQuestion.selected === currentQuestion.correct;
+
     showAnswerIsCorrect(isAnswerCorrect, e.target);
   }
 };
-// Show user if user selection correct or not
+// Stores Selected answers and indicates correct and wrong option elements with background color
 const showAnswerIsCorrect = (isAnswerCorrect, target) => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   quizData.counter++;
   if (isAnswerCorrect) {
     setBackgroundColor("green", target);
+    // Updating quizdata by adding userAnswer object for correct answer
     const userAnswer = {
       questionIndex: quizData.currentQuestionIndex,
       title: currentQuestion.text,
@@ -80,9 +76,11 @@ const showAnswerIsCorrect = (isAnswerCorrect, target) => {
     quizData.selectedCorrectAnswersData.push(userAnswer);
   } else {
     setBackgroundColor("red", target);
-    showCorrect();
-    const correctOption = document.querySelector(`li[data-correct="correct"]`);
 
+    // Show correct answer to user if selected wrong option
+    indicateCorrectAnswer();
+    const correctOption = document.querySelector(`li[data-correct="correct"]`);
+    // Updating quizdata by adding userAnswer object for wrong answer
     const userAnswer = {
       questionIndex: quizData.currentQuestionIndex,
       title: currentQuestion.text,
@@ -93,17 +91,17 @@ const showAnswerIsCorrect = (isAnswerCorrect, target) => {
   }
 };
 
-// Change options backgroundColor
+// Changes options backgroundColor
 const setBackgroundColor = (color, target) => {
   target.style.backgroundColor = color;
 };
 
 // Show user correct answer if selected wrong answer
-const showCorrect = () => {
+const indicateCorrectAnswer = () => {
   const correctOption = document.querySelector(`li[data-correct="correct"]`);
   setBackgroundColor("green", correctOption);
 };
-
+// Navigates to pages based on a router parameter and updates quizData on localStorage
 const nextQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
   addStorage(quizData);
@@ -113,9 +111,10 @@ const nextQuestion = () => {
     router("result");
   }
 };
+// Handles answer selection
 const onAnswerSelected = () => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   currentQuestion.selected === null
-    ? alert("please select any option")
+    ? alert("Please select any option")
     : nextQuestion();
 };

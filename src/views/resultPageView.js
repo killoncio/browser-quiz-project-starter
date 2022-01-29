@@ -35,6 +35,13 @@ export const createAnswersContainer = (answers, correct = null) => {
         correct ? "<b>Correct Answer:</b> " + answer.correctSelection : ""
       }</p></div>`;
   });
-  answersContainerElement.innerHTML += `<button id="${TEST_AGAIN_ID}" class ="btn">Test Again </button>`;
   return answersContainerElement;
+};
+export const createBtnElement = () => {
+  const btnElement = document.createElement("button");
+  btnElement.innerText = "Start Again";
+  btnElement.setAttribute("class", "btn");
+  btnElement.setAttribute("id", TEST_AGAIN_ID);
+  // btnElement.innerHTML = `<button id="${TEST_AGAIN_ID}" class ="btn">Test Again </button>`;
+  return btnElement;
 };
