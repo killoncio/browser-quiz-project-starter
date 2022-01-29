@@ -1,12 +1,13 @@
-'use strict';
+"use strict";
 
-import { quizData } from './data.js';
-import { router } from './router.js';
+import { quizData } from "./data.js";
+import { router } from "./router.js";
+import { readStorage } from "./localstorage/localStorage.js";
 
 const loadApp = () => {
-
-    quizData.currentQuestionIndex = 0;
-    router('question');
+  let data = readStorage();
+  quizData.currentQuestionIndex = data.currentQuestionIndex;
+  router("question");
 };
 
-window.addEventListener('load', loadApp);
+window.addEventListener("load", loadApp);
