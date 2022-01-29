@@ -6,7 +6,7 @@
 }
 
 body {
-  background: url(/public/Assests/body_background.jpg);
+  background: url(./Assests/body_background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   font-family: "Archivo", sans-serif;
