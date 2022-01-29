@@ -4,7 +4,7 @@ import {
     ANSWER_WRAPPER,
     TEST_AGAIN_ID,
 } from "../constants.js";
-
+// Adds the score element to the DOM
 export const createTotalScoreElement = (
     totalScore,
     isSuccess = true,
@@ -19,11 +19,13 @@ export const createTotalScoreElement = (
   }`;
     return scoreElement;
 };
+//Creates a 'div' for result page
 export const createResultContainer = () => {
     const resultContainer = document.createElement("div");
     resultContainer.setAttribute("id", RESULT_CONTAINER_ID);
     return resultContainer;
 };
+//Creates an answer container 
 export const createAnswersContainer = (answers, wrong = null) => {
     const answersContainerElement = document.createElement("div");
     answersContainerElement.innerHTML = `<h2>${wrong ? 'Wrong Answers' : 'Correct Answers'}</h2>`;
@@ -38,11 +40,11 @@ export const createAnswersContainer = (answers, wrong = null) => {
     });
     return answersContainerElement;
 };
+//Creates a start again button
 export const createBtnElement = () => {
     const btnElement = document.createElement("button");
     btnElement.innerText = "Start Again";
     btnElement.setAttribute("class", "btn");
     btnElement.setAttribute("id", TEST_AGAIN_ID);
-    // btnElement.innerHTML = `<button id="${TEST_AGAIN_ID}" class ="btn">Test Again </button>`;
     return btnElement;
 };
