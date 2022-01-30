@@ -33,6 +33,7 @@ export const initQuestionPage = (userInterface) => {
         const correctAnswer = currentQuestion.correct;
         const correctAnswerContainer = showCorrectAnswerElement(correctAnswer);
         userInterface.appendChild(correctAnswerContainer);
+        //prevents button to be clicked more than one
         cheatButtonElement.setAttribute('disabled', 'disabled');
         setTimeout(() => {
             userInterface.removeChild(correctAnswerContainer);
@@ -50,20 +51,37 @@ export const initQuestionPage = (userInterface) => {
         .getElementById(NEXT_QUESTION_BUTTON_ID)
         .addEventListener("click", onAnswerSelected);
 };
+// Handles answer selection
+const onAnswerSelected = () => {
+    const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+    currentQuestion.selected === null ?
+        alert("Please select any option") :
+        nextQuestion();
+};
+// Navigates to pages based on a router parameter and updates quizData on localStorage
+const nextQuestion = () => {
+    quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
+    addStorage(quizData);
+    if (quizData.currentQuestionIndex < quizData.questions.length) {
+        router("question");
+    } else {
+        router("result");
+    }
+};
+
 // Get user selection and call 'showAnswerIsCorrect' function
 const getAnswer = (e) => {
     const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
     if (!currentQuestion.selected) {
         const answer = e.target.innerText;
         currentQuestion.selected = answer.charAt(0);
-        const isAnswerCorrect =
-            currentQuestion.selected === currentQuestion.correct;
+        const isAnswerCorrect = currentQuestion.selected === currentQuestion.correct;
 
-        showAnswerIsCorrect(isAnswerCorrect, e.target);
+        onOptionClicked(isAnswerCorrect, e.target);
     }
 };
 // Stores Selected answers and indicates correct and wrong option elements with background color
-const showAnswerIsCorrect = (isAnswerCorrect, target) => {
+const onOptionClicked = (isAnswerCorrect, target) => {
     const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
     quizData.counter++;
     if (isAnswerCorrect) {
@@ -77,7 +95,6 @@ const showAnswerIsCorrect = (isAnswerCorrect, target) => {
         quizData.selectedCorrectAnswersData.push(userAnswer);
     } else {
         setBackgroundColor("red", target);
-
         // Show correct answer to user if selected wrong option
         indicateCorrectAnswer();
         const correctOption = document.querySelector(`li[data-correct="correct"]`);
@@ -101,21 +118,4 @@ const setBackgroundColor = (color, target) => {
 const indicateCorrectAnswer = () => {
     const correctOption = document.querySelector(`li[data-correct="correct"]`);
     setBackgroundColor("green", correctOption);
-};
-// Navigates to pages based on a router parameter and updates quizData on localStorage
-const nextQuestion = () => {
-    quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
-    addStorage(quizData);
-    if (quizData.currentQuestionIndex < quizData.questions.length) {
-        router("question");
-    } else {
-        router("result");
-    }
-};
-// Handles answer selection
-const onAnswerSelected = () => {
-    const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
-    currentQuestion.selected === null ?
-        alert("Please select any option") :
-        nextQuestion();
 };
